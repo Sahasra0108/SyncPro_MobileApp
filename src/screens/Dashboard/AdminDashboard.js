@@ -6,10 +6,13 @@ import UsersIcon from "../../../assets/users.png";
 import StockInIcon from "../../../assets/stock-in.png";
 import StockOutIcon from "../../../assets/stock-out.png";
 import axios from "axios";
-
-const AdminDashboard = () => {
+ 
+ 
+const AdminDashboard = ({navigation}) => {
   const [totItems, setTotItems] = useState([]);
   const [totUsers, setTotUsers] = useState([]);
+    
+  
 
 
 
@@ -95,7 +98,7 @@ const AdminDashboard = () => {
       </View>
       <View style={style.menuContainer}>
         <Text style={style.text}>Inventory Item</Text>
-        <Button name="Item" onPress={() => {}} />
+        <Button name="Item" onPress={() => navigation.navigate('Item')} />
         <Button name="Adjustment" onPress={() => {}} />
         <Button name="Stock In" onPress={() => {}} />
         <Button name="Stock Out" onPress={() => {}} />
