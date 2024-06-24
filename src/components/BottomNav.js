@@ -8,6 +8,9 @@ import ProfileScreen from "../screens/Profile";
 import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
+import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+
+
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -46,7 +49,7 @@ function ProfileTabIcon() {
 function AdminStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="AdminHome" component={HomeScreen} options={{ title: "Home" }} />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen
         name="ItemList"
         component={ItemList}
@@ -55,12 +58,12 @@ function AdminStack() {
       <Stack.Screen
         name="InRequestList"
         component={InRequestList}
-        options={{ title: "All Inventory Requests" }}
+        options={{ title: "All InRequests" }}
       />
       <Stack.Screen
         name="InRequestDocument"
         component={InRequestDocument}
-        options={{ title: "Inventory Request Document" }}
+        options={{ title: "Request Document" }}
       />
     </Stack.Navigator>
   );
@@ -70,7 +73,7 @@ function BottomNav() {
   return (
     <BottomTab.Navigator screenOptions={screenOptions}>
       <BottomTab.Screen
-        name="Admin"
+        name="Home"
         component={AdminStack}
         options={{
           tabBarLabel: "Home",
