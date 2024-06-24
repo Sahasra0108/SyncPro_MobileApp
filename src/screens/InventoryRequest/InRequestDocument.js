@@ -6,9 +6,7 @@ function InRequestDocument({ route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Request ID: {inRequest.id}</Text>
-      <Text style={styles.status}>Status: {inRequest.status}</Text>
-      {/* Add more details as needed */}
+
     </View>
   );
 }
