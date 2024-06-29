@@ -3,27 +3,7 @@ import { Text, Dimensions } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import axios from "axios";
 
-const data = {
-  labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "Deccember",
-  ],
-  datasets: [
-    {
-      data: [20, 45, 28, 80, 99, 43, 50, 26, 100, 80, 73, 25],
-    },
-  ],
-};
+
 const screenWidth = Dimensions.get("window").width;
 
 const chartConfig = {
@@ -45,7 +25,7 @@ const UsageBarChart = ({ category, year }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://10.0.2.2:8080/request/getAll?itemGroup=${category}&year=${year}`
+          `http://10.0.2.2:8080/request/filtered?itemGroup=${category}&year=${year}`
         );
         console.log(response.data);
         setRequests(response.data);
@@ -58,27 +38,40 @@ const UsageBarChart = ({ category, year }) => {
 
     fetchData();
   }, [category, year]);
+
   console.log(requests);
+
   if (loading) {
     return <Text>Loading...</Text>;
   }
 
-  //   const requestsByMonth = requests
-  //     .map((req) => ({
-  //       date: req.date,
-  //       status: req.reqStatus,
-  //     }))
-  //     .reduce((acc, rq) => {
-  //       const date = new Date(rq.date);
-  //       const month = date.toLocaleDateString("default", { month: "short" });
-  //       acc[month] = acc[month] || [];
-  //       if (rq.status === "accepted") {
-  //         acc[month].push(rq);
-  //       }
-  //       return acc;
-  //     }, {});
-  //   console.log(requestsByMonth);
+  
+    const requestsByMonth = requests
+    .filter(req => req.reqStatus === "PENDING")
+    .reduce((acc, rq) => {
+      const date = new Date(rq.date);
+      const month = date.toLocaleString("default", { month: "short" });
+      acc[month] = acc[month] || 0;
+      acc[month]++;
+      return acc;
+    }, {});
+    console.log(requestsByMonth);
 
+    const xLabels = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    const data = {
+      labels: xLabels,
+      datasets: [
+        {
+          data: xLabels.map(month => requestsByMonth[month] || 0),
+          color: (opacity = 1) => `rgba(92, 153, 142, ${opacity})`,
+          strokeWidth: 2,
+        }
+      ],
+    };
   return (
     <BarChart
       //style={graphStyle}
