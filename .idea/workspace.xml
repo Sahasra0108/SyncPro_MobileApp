@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+
+    <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="InRequestDocument.js initialized">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
+    <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="Unversioned files">
+      <change afterPath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BottomNav.js" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2i6aXIXS7hkiOa1KuL6KnP89qLy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Maleesha&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="" />
+      <created>1718813520547</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718813520547</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Request list added">
+      <option name="closed" value="true" />
+      <created>1718890707010</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718890707010</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Unversioned files">
+      <option name="closed" value="true" />
+      <created>1718890750570</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718890750570</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Modifications">
+      <option name="closed" value="true" />
+      <created>1718893587944</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718893587944</updated>
+    </task>
+    <task id="LOCAL-00004" summary="InRequestDocument.js initialized">
+      <option name="closed" value="true" />
+      <created>1719128182540</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719128182540</updated>
+    </task>
+    <task id="LOCAL-00005" summary="InRequestDocument.js initialized">
+      <option name="closed" value="true" />
+      <created>1719128555629</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719128555629</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit" />
+    <MESSAGE value="Request list added" />
+    <MESSAGE value="Unversioned files" />
+    <MESSAGE value="Modifications" />
+    <MESSAGE value="InRequestDocument.js initialized" />
+    <option name="LAST_COMMIT_MESSAGE" value="InRequestDocument.js initialized" />
+  </component>
+</project>
