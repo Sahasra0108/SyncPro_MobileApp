@@ -21,6 +21,8 @@ const style = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#D9D9D9",
     width: 360,
+    height:50,
+    fontSize:18
   },
 
 });

@@ -1,12 +1,12 @@
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AdminDashboard from './Dashboard/AdminDashboard';
-import { StyleSheet } from 'react-native';
 
-export default function HomeScreen() {
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AdminDashboard from "./Dashboard/AdminDashboard";
+import React from "react";
+import { StyleSheet } from "react-native";
+export default function HomeScreen({navigation}) {
   return (
     <SafeAreaProvider>
-       <AdminDashboard  />
+      <AdminDashboard navigation={navigation}/>
     </SafeAreaProvider>
   );
 }

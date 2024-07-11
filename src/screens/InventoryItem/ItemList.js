@@ -6,8 +6,6 @@ import { DataTable } from "react-native-paper";
 
 function ItemList() {
   const [items, setItems] = useState([]);
-  const from = 0; // Adjust these values as needed for pagination
-  const to = 10; // Adjust these values as needed for pagination
   
   useEffect(() => {
     const fetchData = async () => {
@@ -28,11 +26,12 @@ function ItemList() {
     };
     fetchData();
   }, []);
+
+  const from = 0; 
+  const to = items.length;
   return (
     <>
-      <View>
-        <Text style={styles.p}>All items</Text>
-      </View>
+
       <DataTable style={styles.container}>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title>Item id</DataTable.Title>
@@ -44,7 +43,7 @@ function ItemList() {
           <DataTable.Row key={item.id}>
             <DataTable.Cell>{item.id}</DataTable.Cell>
             <DataTable.Cell>{item.name}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.quantity}</DataTable.Cell>
+            <DataTable.Cell >{item.quantity}</DataTable.Cell>
             <DataTable.Cell>{item.status}</DataTable.Cell>
           </DataTable.Row>
         ))}

@@ -1,17 +1,14 @@
-import { Appbar, BottomNavigation } from 'react-native-paper';
-import SearchBar from './SearchBar';
-import Search from '../screens/Search';
+import { Appbar, BottomNavigation } from "react-native-paper";
+import SearchBar from "./SearchBar";
+import Search from "../screens/Search";
 
-
-function TopNav(){
-return(
-<Appbar.Header>
-      
-      <Search/>
+function TopNav() {
+  return (
+    <Appbar.Header>
+      <Search />
       <Appbar.Action icon="bell" onPress={() => {}} />
-
-</Appbar.Header>
-)
+    </Appbar.Header>
+  );
 }
 
-export default TopNav
+export default TopNav;

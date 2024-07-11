@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   View,
   Text,
@@ -11,7 +13,7 @@ import { TextInput } from "react-native-paper";
 import axios from "axios";
 
 export default function ProfileScreen(props) {
-  const { userId = "3", onPress, title = "Save" } = props;
+  const { userId = "4", onPress, title = "Save" } = props;
   const [userDetails, setUserDetails] = useState({
     firstName: '',
     lastName: '',
@@ -60,6 +62,7 @@ export default function ProfileScreen(props) {
   };
 
   return (
+    
     <View style={styles.container}>
       <ScrollView>
         <Text style={styles.topic1}>Edit Profile</Text>
@@ -140,7 +143,7 @@ export default function ProfileScreen(props) {
           <Text style={styles.text}>{title}</Text>
         </Pressable>
       </ScrollView>
-    </View>
+    </View>  
   );
 }
 
@@ -180,6 +183,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: "white",
     paddingBottom: 100,
+    paddingTop:50,
   },
   button: {
     alignItems: "center",

@@ -1,14 +1,21 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/Profile';
+import * as React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, Image, StyleSheet, Text } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import HomeScreen from "../screens/HomeScreen";
+import ProfileScreen from "../screens/Profile";
+import ItemList from "../screens/InventoryItem/ItemList";
+import InRequestList from "../screens/InventoryRequest/InRequestList";
+import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
+import AdjustmentList from "../screens/Adjustment/AdjustmentList";
+import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+
+
 
 const BottomTab = createBottomTabNavigator();
-
+const Stack = createNativeStackNavigator();
+//This is a comment
 const screenOptions = {
   tabBarShowLabel: false,
   headerShown: false,
@@ -29,7 +36,7 @@ function ProfileTabIcon() {
   return (
     <View style={styles.profileContainer}>
       <Image
-        source={require('../../assets/man.jpeg')}
+        source={require("../../assets/man.jpeg")}
         style={styles.profileImage}
       />
       <View style={styles.profileText}>
@@ -40,16 +47,57 @@ function ProfileTabIcon() {
   );
 }
 
+function AdminStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="ItemList"
+        component={ItemList}
+        options={{ title: "All Items" }}
+      />
+      <Stack.Screen
+        name="InRequestList"
+        component={InRequestList}
+        options={{ title: "All InRequests" }}
+
+      />
+      <Stack.Screen
+        name="InRequestDocument"
+        component={InRequestDocument}
+        options={{ title: "Request Document" }}
+
+
+      />
+
+     <Stack.Screen
+        name="ItemUsageAnalysis"
+        component={ItemUsage}
+        options={{ title: "Item Usage Analysis" }}
+
+     />
+
+      <Stack.Screen
+        name="AdjustmentList"
+        component={AdjustmentList}
+        options={{ title: "All Adjustments" }}
+
+
+      />
+    </Stack.Navigator>
+  );
+}
+
 function BottomNav() {
   return (
-    <BottomTab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
+    <BottomTab.Navigator screenOptions={screenOptions}>
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={AdminStack}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
-            <Icon name="home" color={'black'} size={26} />
+            <Icon name="home" color={"black"} size={26} />
           ),
         }}
       />
@@ -57,7 +105,7 @@ function BottomNav() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: '',
+          tabBarLabel: "",
           tabBarIcon: () => <ProfileTabIcon />,
         }}
       />
@@ -89,5 +137,3 @@ const styles = StyleSheet.create({
     color: "black",
   },
 });
-
- 
