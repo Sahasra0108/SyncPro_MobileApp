@@ -84,7 +84,7 @@ const AdminDashboard = () => {
           <Button name="Requests" onPress={() => navigation.navigate("InRequestList")} />
           <Button name="External Reservations" onPress={() => {}} />
           <Button name="My Reservations" onPress={() => {}} />
-          <Button name="Maintenance Ticket" onPress={() => {}} />
+          <Button name="Maintenance Ticket" onPress={() => navigation.navigate("TicketList")} />
         </View>
         <View style={style.menuContainer}>
           <Text style={style.menuHeding}>Reports</Text>

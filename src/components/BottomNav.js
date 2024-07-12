@@ -10,6 +10,8 @@ import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
 import AdjustmentList from "../screens/Adjustment/AdjustmentList";
 import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+import TicketList from "../screens/Ticket/TicketList";
+import Newticket from "../screens/Ticket/Newticket";
 
 
 
@@ -81,6 +83,20 @@ function AdminStack() {
         name="AdjustmentList"
         component={AdjustmentList}
         options={{ title: "All Adjustments" }}
+
+
+      />
+      <Stack.Screen
+        name="TicketList"
+        component={TicketList}
+        options={{ title: "All Issue Tickets" }}
+
+
+      />
+       <Stack.Screen
+        name="Newticket"
+        component={Newticket}
+        options={{ title: "New ticket" }}
 
 
       />
