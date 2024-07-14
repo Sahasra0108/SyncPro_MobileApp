@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity,Pressable,ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { DataTable } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -37,9 +45,7 @@ function TicketList(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://10.0.2.2:8080/ticket/getAll`
-        );
+        const response = await axios.get(`http://10.0.2.2:8080/ticket/getAll`);
         const data = response.data.map((ticket) => ({
           id: ticket.ticketId,
           status: ticket.ticketStatus,
@@ -66,43 +72,44 @@ function TicketList(props) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-      <Pressable style={styles.button}>
-          <Text style={styles.text} onPress={() => navigation.navigate("Newticket")}>{title}</Text>
-        </Pressable>
-      <DataTable style={styles.container}>
-        <DataTable.Header>
-          <DataTable.Title style={styles.leftTitle}>
-          <Text style={styles.titleText}>Issue Ticket No</Text>
-          </DataTable.Title>
-          <DataTable.Title style={styles.rightTitle}>
-          <Text style={styles.titleText}>Status</Text>
-          </DataTable.Title>
-        </DataTable.Header>
-        {ticket.slice(from, to).map((ticket) => (
-          <TouchableOpacity
-            key={ticket.id}
-            
+        <Pressable style={styles.button}>
+          <Text
+            style={styles.text}
+            onPress={() => navigation.navigate("Newticket")}
           >
-          <View style={styles.box}>
-            <DataTable.Row style={getStatusClass(ticket.status)}>
-              <DataTable.Cell style={styles.leftCell}>
-                <Text style={styles.boxText}>{ticket.id}</Text>
-              </DataTable.Cell>
-              <DataTable.Cell style={styles.rightCell}>
-                <Text style={styles.boxText}>{ticket.status}</Text>
-              </DataTable.Cell>
-            </DataTable.Row>
-          </View>
-          </TouchableOpacity>
-        ))}
-      </DataTable>
+            {title}
+          </Text>
+        </Pressable>
+        <DataTable style={styles.container}>
+          <DataTable.Header>
+            <DataTable.Title style={styles.leftTitle}>
+              <Text style={styles.titleText}>Issue Ticket No</Text>
+            </DataTable.Title>
+            <DataTable.Title style={styles.rightTitle}>
+              <Text style={styles.titleText}>Status</Text>
+            </DataTable.Title>
+          </DataTable.Header>
+          {ticket.slice(from, to).map((ticket) => (
+            <TouchableOpacity key={ticket.id}>
+              <View style={styles.box}>
+                <DataTable.Row style={getStatusClass(ticket.status)}>
+                  <DataTable.Cell style={styles.leftCell}>
+                    <Text style={styles.boxText}>{ticket.id}</Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell style={styles.rightCell}>
+                    <Text style={styles.boxText}>{ticket.status}</Text>
+                  </DataTable.Cell>
+                </DataTable.Row>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </DataTable>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 export default TicketList;
-
 
 const styles = StyleSheet.create({
   container: {
@@ -114,12 +121,11 @@ const styles = StyleSheet.create({
   leftTitle: {
     flex: 1,
     justifyContent: "flex-start",
-    
   },
   rightTitle: {
     flex: 1,
     justifyContent: "flex-end",
-    paddingRight:25
+    paddingRight: 25,
   },
   leftCell: {
     flex: 1,
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#007EF2",
     height: 45,
     width: "95%",
-    marginLeft:8
+    marginLeft: 8,
   },
   text: {
     fontSize: 18,
@@ -172,7 +178,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   scrollContent: {
-    paddingHorizontal:15,
+    paddingHorizontal: 15,
     paddingBottom: 100,
     paddingTop: 1,
   },
@@ -181,44 +187,42 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   titleText: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   pending: {
-    backgroundColor: '#FFFF33',
-    color: 'black',
+    backgroundColor: "#FFFF33",
+    color: "black",
     borderRadius: 30,
   },
   completed: {
-    backgroundColor: '#90EE90',
-    color: 'black',
+    backgroundColor: "#90EE90",
+    color: "black",
     borderRadius: 30,
-    
-  
   },
   inProgress: {
-    backgroundColor: '#ADD8E6',
-    color: 'black',
+    backgroundColor: "#ADD8E6",
+    color: "black",
     borderRadius: 30,
   },
   rejected: {
-    backgroundColor: '#FF7F7F',
-    color: 'black',
+    backgroundColor: "#FF7F7F",
+    color: "black",
     borderRadius: 30,
   },
   accepted: {
-    backgroundColor: '#90EE90',
-    color: 'black',
+    backgroundColor: "#90EE90",
+    color: "black",
     borderRadius: 30,
   },
   sentToAdmin: {
-    backgroundColor: '#CBC3E3',
-    color: 'black',
+    backgroundColor: "#CBC3E3",
+    color: "black",
   },
   defaultStatus: {
-    backgroundColor: 'blue',
-    color: 'white',
+    backgroundColor: "blue",
+    color: "white",
     borderRadius: 30,
   },
 });
