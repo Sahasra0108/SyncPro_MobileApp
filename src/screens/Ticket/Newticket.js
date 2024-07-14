@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   View,
@@ -11,7 +11,7 @@ import {
 import { TextInput } from "react-native-paper";
 import axios from "axios";
 import { Picker } from "@react-native-picker/picker";
-import Autocomplete from "react-native-autocomplete-input";
+
 
 export default function Newticket(props) {
   const { onPress, title = "Create Ticket" } = props;
@@ -24,6 +24,29 @@ export default function Newticket(props) {
     description: '',
   });
 
+  const [itemNameOptions, setItemNameOptions] = useState([]);
+  const [brandOptions, setBrandOptions] = useState([]);
+  const [modelOptions, setModelOptions] = useState([]);
+  const [errors,setErrors]=useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://10.0.2.2:8080/inventory-item/getAll");
+        const uniqueItemNames = [...new Set(response.data.map(item => item.itemName))];
+        const uniqueBrands = [...new Set(response.data.map(item => item.brand))];
+        const uniqueModels = [...new Set(response.data.map(item => item.model))];
+
+        setItemNameOptions(uniqueItemNames);
+        setBrandOptions(uniqueBrands);
+        setModelOptions(uniqueModels);
+      } catch (error) {
+        console.error("Error fetching item data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  
   const textInputTheme = {
     roundness: 10,
     colors: {
@@ -33,54 +56,113 @@ export default function Newticket(props) {
     underlineColorAndroid: "transparent",
   };
 
+  const validateField = (name, value) => {
+    const validationErrors = {};
+
+    if (name === "itemName" && !value) {
+      validationErrors.itemName = "Item name is required";
+    } else if (name === "brand" && !value) {
+      validationErrors.brand = "Item brand is required";
+    } else if (name === "model" && !value) {
+      validationErrors.model = "Item model is required";
+    } else if (name === "topic" && !value) {
+      validationErrors.topic = "Topic is required";
+    } else if (name === "date" && !value) {
+      validationErrors.date = "Date is required";
+    } else if (name === "description") {
+      if (!value) {
+        validationErrors.description = "Description is required";
+      } else if (value.length < 10 || value.length > 200) {
+        validationErrors.description = "Description must be between 10 and 200 characters";
+      }
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validationErrors[name],
+    }));
+
+    if (!validationErrors[name]) {
+      setErrors((prevErrors) => {
+        const { [name]: removedError, ...rest } = prevErrors;
+        return rest;
+      });
+    }
+  };
+
+  const handleBlur = (name, value) => {
+    validateField(name, value);
+  };
+
   const handleChange = (name, value) => {
     setTicket({ ...ticket, [name]: value });
+    validateField(name, value);
   };
 
   const handleSave = async () => {
     try {
       await axios.post(`http://10.0.2.2:8080/ticket/add`, ticket);
       if (onPress) onPress();
+      Alert.alert("Success", "Succesfully created the ticket");
     } catch (error) {
       console.error('Error creating new ticket:', error);
       Alert.alert("Error", "Failed to create new ticket. Please try again.");
+      const backendErrors = error.response?.data 
+      setErrors(backendErrors);
+
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.topic1}>New Ticket</Text>
         <Text style={styles.label}>Item Name</Text>
-        <TextInput
-          theme={textInputTheme}
+        {errors.itemName && <Text style={styles.errorText}>{errors.itemName}</Text>}
+        <Picker
+          selectedValue={ticket.itemName}
           style={styles.input}
-          value={ticket.itemName}
-          onChangeText={(text) => handleChange('itemName', text)}
-          underlineColor="transparent"
-        />
+          onValueChange={(itemValue) => handleChange('itemName', itemValue)}
+          onBlur={() => handleBlur('itemName', ticket.itemName)}
+        >
+          <Picker.Item label="Select Item Name" value="" />
+          {itemNameOptions.map((item, index) => (
+            <Picker.Item key={index} label={item} value={item} />
+          ))}
+        </Picker>
         <Text style={styles.label}>Item Brand</Text>
-        <TextInput
-          theme={textInputTheme}
+        {errors.brand && <Text style={styles.errorText}>{errors.brand}</Text>}
+        <Picker
+          selectedValue={ticket.brand}
           style={styles.input}
-          value={ticket.brand}
-          onChangeText={(text) => handleChange('brand', text)}
-          underlineColor="transparent"
-        />
+          onValueChange={(itemValue) => handleChange('brand', itemValue)}
+          onBlur={() => handleBlur('brand', ticket.brand)}
+        >
+          <Picker.Item label="Select Brand" value="" />
+          {brandOptions.map((brand, index) => (
+            <Picker.Item key={index} label={brand} value={brand} />
+          ))}
+        </Picker>
         <Text style={styles.label}>Item Model</Text>
-        <TextInput
-          theme={textInputTheme}
+        {errors.model && <Text style={styles.errorText}>{errors.model}</Text>}
+        <Picker
+          selectedValue={ticket.model}
           style={styles.input}
-          value={ticket.model}
-          onChangeText={(text) => handleChange('model', text)}
-          underlineColor="transparent"
-        />
+          onValueChange={(itemValue) => handleChange('model', itemValue)}
+          onBlur={() => handleBlur('model', ticket.model)}
+        >
+          <Picker.Item label="Select Model" value="" />
+          {modelOptions.map((model, index) => (
+            <Picker.Item key={index} label={model} value={model} />
+          ))}
+        </Picker>
         <Text style={styles.label}>Topic for Ticket</Text>
-         
+        {errors.topic && <Text style={styles.errorText}>{errors.topic}</Text>}
           <Picker
             selectedValue={ticket.topic}
-            onValueChange={(itemValue) => handleChange('topic', itemValue)}
             style={styles.input}
+            onValueChange={(itemValue) => handleChange('topic', itemValue)}
+            onBlur={() => handleBlur('topic', ticket.topic)}
           >
             <Picker.Item label="Select Topic" value="" />
             <Picker.Item label="Network Issues" value="Network Issues" />
@@ -100,11 +182,13 @@ export default function Newticket(props) {
           underlineColor="transparent"
         />
         <Text style={styles.label}>Description</Text>
+        {errors.description && <Text style={styles.errorText}>{errors.description}</Text>}
         <TextInput
           theme={textInputTheme}
           style={[styles.input, { height: 100 }]}
           value={ticket.description}
           onChangeText={(text) => handleChange('description', text)}
+          onBlur={() => handleBlur('description', ticket.description)}
           underlineColor="transparent"
           multiline
         />
@@ -144,8 +228,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     backgroundColor: "white",
-    paddingBottom: 100,
-    paddingTop: 5,
   },
   button: {
     alignItems: "center",
@@ -175,5 +257,15 @@ const styles = StyleSheet.create({
   picker: {
     height: 45,
     width: "100%",
+  },
+  scrollContent: {
+    paddingHorizontal: 3,
+    paddingBottom: 100,
+    paddingTop: 1,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    marginBottom:5,
   },
 });
