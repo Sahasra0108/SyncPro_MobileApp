@@ -27,7 +27,7 @@ const UsageBarChart = ({ category, year }) => {
         const response = await axios.get(
           `http://10.0.2.2:8080/request/filtered?itemGroup=${category}&year=${year}`
         );
-        console.log(response.data);
+        console.log("requests",response.data);
         setRequests(response.data);
       } catch (error) {
         console.log(error);
@@ -47,12 +47,11 @@ const UsageBarChart = ({ category, year }) => {
 
   
     const requestsByMonth = requests
-    .filter(req => req.reqStatus === "PENDING")
+    .filter(req => req.reqStatus !== "REJECTED")
     .reduce((acc, rq) => {
-      const date = new Date(rq.date);
-      const month = date.toLocaleString("default", { month: "short" });
-      acc[month] = acc[month] || 0;
-      acc[month]++;
+      const [year, month] = rq.createdDateTime; // Extract year and month
+      acc[month - 1] = acc[month - 1] || 0; // Month is 1-indexed
+      acc[month - 1]++;
       return acc;
     }, {});
     console.log(requestsByMonth);
@@ -66,7 +65,7 @@ const UsageBarChart = ({ category, year }) => {
       labels: xLabels,
       datasets: [
         {
-          data: xLabels.map(month => requestsByMonth[month] || 0),
+          data: xLabels.map((_, index) => requestsByMonth[index] || 0),
           color: (opacity = 1) => `rgba(92, 153, 142, ${opacity})`,
           strokeWidth: 2,
         }
@@ -76,7 +75,7 @@ const UsageBarChart = ({ category, year }) => {
     <BarChart
       //style={graphStyle}
       data={data}
-      width={screenWidth}
+      width={screenWidth-10}
       height={220}
       //yAxisLabel="$"
       chartConfig={chartConfig}
