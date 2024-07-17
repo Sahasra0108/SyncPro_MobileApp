@@ -13,6 +13,9 @@ import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
 import ItemDetails from "../screens/InventoryItem/ItemDetail";
 import TicketList from "../screens/Ticket/TicketList";
 import Newticket from "../screens/Ticket/Newticket";
+import UserActivityHistory from "../screens/Reports/History";
+
+ 
  
 
 
@@ -88,6 +91,13 @@ function AdminStack() {
         name="Newticket"
         component={Newticket}
         options={{ title: "New ticket" }}
+
+
+      />
+      <Stack.Screen
+        name="UserActivityHistory"
+        component={UserActivityHistory}
+        options={{ title: "Recent Activities" }}
 
 
       />
