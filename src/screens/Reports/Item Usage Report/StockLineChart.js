@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Dimensions } from "react-native";
+import { Text, Dimensions, View } from "react-native";
 import axios from "axios";
 import { LineChart } from "react-native-chart-kit";
 
@@ -21,7 +21,7 @@ const StockLineChart = ({ category, year }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/stock-in/getAll?itemGroup=${category}&year=${year}`
+          `http://10.0.2.2:8080/stock-in/getAll?itemGroup=${category}&year=${year}`
         );
         setStockIn(response.data);
       } catch (error) {
@@ -47,10 +47,6 @@ const StockLineChart = ({ category, year }) => {
     fetchData();
   }, [category, year]);
 
-  //   if (stockIn.length === 0 && stockOut.length === 0) {
-  //     return <Text className="text-center m-10">No records found</Text>;
-  //   }
-
   const stockInByMonth = stockIn
     .map((stock) => ({
       date: stock.date,
@@ -58,7 +54,7 @@ const StockLineChart = ({ category, year }) => {
     }))
     .reduce((acc, si) => {
       const date = new Date(si.date);
-      const month = date.toLocaleString("default", { month: "long" });
+      const month = date.toLocaleString("default", { month: "short" });
       acc[month] = acc[month] || [];
       acc[month].push(si.quantity);
       return acc;
@@ -73,7 +69,7 @@ const StockLineChart = ({ category, year }) => {
     }))
     .reduce((acc, so) => {
       const date = new Date(so.date);
-      const month = date.toLocaleString("default", { month: "long" });
+      const month = date.toLocaleString("default", { month: "short" });
       acc[month] = acc[month] || [];
       acc[month].push(so.quantity);
       return acc;
@@ -89,7 +85,6 @@ const StockLineChart = ({ category, year }) => {
       sumByMonthSI[month] = sum;
     }
   }
-
   const sumByMonthSO = {};
   for (const month in stockOutByMonth) {
     if (stockOutByMonth.hasOwnProperty(month)) {
@@ -102,20 +97,19 @@ const StockLineChart = ({ category, year }) => {
   }
 
   const xLabels = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
-
   // Ensure that there is a value for each month, even if it is 0
   xLabels.forEach((label) => {
     sumByMonthSI[label] = sumByMonthSI[label] || 0;
@@ -125,29 +119,33 @@ const StockLineChart = ({ category, year }) => {
   const data = {
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43, 50, 26, 200, 80, 73, 25],
-        // data: {sumByMonthSI},
-        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        data: xLabels.map((label) => sumByMonthSI[label]),
+        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
+        strokeWidth: 2,
       },
       {
-        data: [50, 150, 10, 60, 20, 43, 50, 50, 150, 5, 200, 80],
-        // data: {sumByMonthSI},
-        color: (opacity = 1) => `rgba(150, 65, 20, ${opacity})`, // optional
-        strokeWidth: 2, // optional
+        data: xLabels.map((label) => sumByMonthSO[label]),
+        color: (opacity = 1) => `rgba(150, 65, 20, ${opacity})`,
+        strokeWidth: 2,
       },
     ],
-    legend: ["Stock In","Stock Out"], // optional
+    legend: ["Stock In", "Stock Out"],
   };
 
   return (
-    <LineChart
-      data={data}
-      width={screenWidth}
-      height={220}
-      chartConfig={chartConfig}
-      bezier
-    />
+    <View>
+      {stockIn.length === 0 && stockOut.length === 0 ? (
+        <Text className="text-center m-10">No records found</Text>
+      ) : (
+        <LineChart
+          data={data}
+          width={screenWidth}
+          height={220}
+          chartConfig={chartConfig}
+          bezier
+        />
+      )}
+    </View>
   );
 };
 
