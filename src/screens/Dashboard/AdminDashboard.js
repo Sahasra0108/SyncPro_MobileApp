@@ -20,6 +20,7 @@ const AdminDashboard = () => {
   const [totItems, setTotItems] = useState([]);
   const [totUsers, setTotUsers] = useState([]);
   const navigation = useNavigation();
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +84,7 @@ const AdminDashboard = () => {
           <Button name="Requests" onPress={() => navigation.navigate("InRequestList")} />
           <Button name="External Reservations" onPress={() => {}} />
           <Button name="My Reservations" onPress={() => {}} />
-          <Button name="Maintenance Ticket" onPress={() => {}} />
+          <Button name="Maintenance Ticket" onPress={() => navigation.navigate("TicketList")} />
         </View>
         <View style={style.menuContainer}>
           <Text style={style.menuHeding}>Inventory</Text>
@@ -109,10 +110,16 @@ const AdminDashboard = () => {
             onPress={() => navigation.navigate("ItemUsageAnalysis")}
           />
         </View>
-      
-
-
-
+        <View style={style.menuContainer}>
+          <Text style={style.menuHeding}>Inventory</Text>
+          <Button name="Item" onPress={() => navigation.navigate("ItemList")} />
+          <Button name="Adjustment"
+          onPress={() => navigation.navigate("AdjustmentList")}
+          />
+          <Button name="Stock In" onPress={() => {}} />
+          <Button name="Stock Out" onPress={() => {}} />
+        </View>
+ 
 
       </ScrollView>
     </SafeAreaView>
