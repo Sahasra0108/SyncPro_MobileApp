@@ -11,7 +11,7 @@ import UsageBarChart from "./UsageBarChart";
 import StockLineChart from "./StockLineChart";
 
 const categoryList = [
-  { value: "COMPUTERS_AND_LAPTOPS", name: "ComputerS & Laptops" },
+  { value: "COMPUTERS_AND_LAPTOPS", name: "Computers & Laptops" },
   { value: "COMPUTER_ACCESSORIES", name: "Computer Accessories" },
   { value: "COMPUTER_HARDWARE", name: "Computer Hardware" },
   { value: "PRINTERS_AND_SCANNERS", name: "PrinterS & Scanners" },
@@ -102,10 +102,10 @@ export default UsageAnalysis = () => {
           USAGE ANALYSIS OF CATEGORY {category} {'\n'} (JAN-DEC) {'\n'}  {year} 
         </Text>
       </View>
-      <View style={styles.view}>
+      <View style={styles.container}>
         <UsageBarChart category={category} year={year}/>
       </View>
-      <View style={styles.view}>
+      <View style={styles.container}>
         <StockLineChart category={category} year={year}/>
       </View>
     </SafeAreaView>
@@ -122,7 +122,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    margin: 5,
+    margin: 2,
+  },
+  container:{
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    margin: 2,
+    marginRight:30
   },
   customButton: {
     justifyContent: "center",
