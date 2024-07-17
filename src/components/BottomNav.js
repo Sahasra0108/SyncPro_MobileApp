@@ -20,9 +20,10 @@ import UserActivityHistory from "../screens/Reports/History";
 
 
 
+
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-//This is a comment
+
 const screenOptions = {
   tabBarShowLabel: false,
   headerShown: false,
@@ -73,29 +74,11 @@ function AdminStack() {
         name="InRequestList"
         component={InRequestList}
         options={{ title: "All InRequests" }}
-
       />
       <Stack.Screen
         name="InRequestDocument"
         component={InRequestDocument}
-        options={{ title: "Request Document" }}
-
-
-      />
-
-     <Stack.Screen
-        name="ItemUsageAnalysis"
-        component={ItemUsage}
-        options={{ title: "Item Usage Analysis" }}
-
-     />
-
-      <Stack.Screen
-        name="AdjustmentList"
-        component={AdjustmentList}
-        options={{ title: "All Adjustments" }}
-
-
+        options={{ title: "Inventory Request Document" }}
       />
       <Stack.Screen
         name="TicketList"
