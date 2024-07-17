@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity,ScrollView } from "react-native";
 import { DataTable } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -56,6 +56,7 @@ function InRequestsList() {
       <View style={styles.header}>
         <Text style={styles.title}>All Inventory Requests</Text>
       </View>
+     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <DataTable style={styles.container}>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title style={styles.leftTitle}>
@@ -74,7 +75,7 @@ function InRequestsList() {
           return (
             <TouchableOpacity
               key={inRequest.id}
-              onPress={() => navigation.navigate("InRequestDocument", { inRequest })}
+              onPress={() => navigation.navigate("InRequestDocument", {reqId: inRequest.id})}
             >
               <DataTable.Row style={[styles.box, statusStyle]}>
                 <DataTable.Cell style={styles.leftCell}>
@@ -88,6 +89,7 @@ function InRequestsList() {
           );
         })}
       </DataTable>
+     </ScrollView>
     </SafeAreaProvider>
   );
 }
@@ -98,6 +100,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 15,
   },
+scrollViewContent: {
+  paddingBottom: 50,
+ },
   tableHeader: {
     backgroundColor: "#DCDCDC",
   },

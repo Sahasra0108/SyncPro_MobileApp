@@ -8,7 +8,7 @@ import ProfileScreen from "../screens/Profile";
 import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
-import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+//import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
 
 
 
@@ -63,7 +63,7 @@ function AdminStack() {
       <Stack.Screen
         name="InRequestDocument"
         component={InRequestDocument}
-        options={{ title: "Request Document" }}
+        options={{ title: "Inventory Request Document" }}
       />
     </Stack.Navigator>
   );
