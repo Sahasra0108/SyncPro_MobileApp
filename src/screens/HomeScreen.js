@@ -1,3 +1,4 @@
+
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AdminDashboard from "./Dashboard/AdminDashboard";
 import React from "react";
@@ -13,8 +14,8 @@ export default function HomeScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#fff",
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
 });

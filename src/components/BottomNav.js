@@ -8,7 +8,11 @@ import ProfileScreen from "../screens/Profile";
 import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
-//import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+import AdjustmentList from "../screens/Adjustment/AdjustmentList";
+import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+import TicketList from "../screens/Ticket/TicketList";
+import Newticket from "../screens/Ticket/Newticket";
+
 
 
 
@@ -64,6 +68,20 @@ function AdminStack() {
         name="InRequestDocument"
         component={InRequestDocument}
         options={{ title: "Inventory Request Document" }}
+      />
+      <Stack.Screen
+        name="TicketList"
+        component={TicketList}
+        options={{ title: "All Issue Tickets" }}
+
+
+      />
+       <Stack.Screen
+        name="Newticket"
+        component={Newticket}
+        options={{ title: "New ticket" }}
+
+
       />
     </Stack.Navigator>
   );
