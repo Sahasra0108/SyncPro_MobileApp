@@ -19,7 +19,9 @@ function InRequestsList() {
         const response = await axios.get(
           "http://10.0.2.2:8080/request/getAll"
         );
-        const data = response.data.map((inRequest) => ({
+        const data = response.data
+        .filter(inRequest => inRequest.workSite === "ONSITE")
+        .map((inRequest) => ({
           id: inRequest.reqId,
           status: inRequest.reqStatus,
           updateDateTime: inRequest.updateDateTime
