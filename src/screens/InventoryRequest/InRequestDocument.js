@@ -7,14 +7,27 @@ import axios from 'axios';
 function InRequestDocument({ route, navigation }) {
   const { reqId } = route.params;
   const [inRequest, setInRequest] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
+   const [itemDetails, setItemDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+useEffect(() => {
     const fetchRequestDetails = async () => {
       try {
         const response = await axios.get(`http://10.0.2.2:8080/request/getById/${reqId}`);
-        setInRequest(response.data);
+        const request = response.data;
+        const formattedUpdateDateTime = formatDateTime(request.updateDateTime);
+        const formattedCreationDateTime = formatDateTime(request.creationDateTime);
+        setInRequest({ ...request, formattedUpdateDateTime, formattedCreationDateTime });
+
+        const userResponse = await axios.get(`http://10.0.2.2:8080/user/users/${request.userId}`);
+        const user = userResponse.data;
+        setUserDetails(user);
+
+        const itemResponse = await axios.get(`http://10.0.2.2:8080/inventory-item/getById/${request.itemId}`);
+        const item = itemResponse.data;
+        setItemDetails(item);
       } catch (error) {
         setError("Failed to fetch data");
         console.log(error);
@@ -25,6 +38,29 @@ function InRequestDocument({ route, navigation }) {
     fetchRequestDetails();
   }, [reqId]);
 
+ const formatDateTime = (dateTimeArray) => {
+     const date = new Date(Date.UTC(dateTimeArray[0], dateTimeArray[1] - 1, dateTimeArray[2], dateTimeArray[3], dateTimeArray[4], dateTimeArray[5]));
+     const formattedDate = date.toLocaleDateString();
+     const formattedTime = date.toLocaleTimeString();
+     return { formattedDate, formattedTime };
+ };
+
+   const getAlertBackgroundColor = (status) => {
+      switch (status) {
+        case 'ACCEPTED':
+          return '#008000'; // green
+        case 'REJECTED':
+          return '#8B0000'; // red
+        case 'PENDING':
+          return '#00008B'; // blue
+        case 'SENT_TO_ADMIN':
+          return '#FFD700'; // yellow
+        case 'WANT_TO_RETURN_ITEM':
+          return '#800080'; // purple
+        default:
+          return '#ffffff'; // white
+      }
+    };
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
@@ -39,7 +75,7 @@ function InRequestDocument({ route, navigation }) {
         <View style={styles.topButtonContainer}>
           <TouchableOpacity style={styles.downloadButton}>
             <Icon name="download" size={20} color="#ffffff" style={styles.downloadIcon} />
-            <Text style={styles.downloadText}>Download</Text>
+            <Text style={styles.downloadText}>Edit</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.menuContainer}>
@@ -47,9 +83,11 @@ function InRequestDocument({ route, navigation }) {
             <Text style={styles.menuHeading}>INVENTORY REQUEST</Text>
           </View>
           <View style={styles.rowContainer}>
-            <View style={styles.alertContainer}>
+           <View style={[styles.alertContainer, { backgroundColor: getAlertBackgroundColor(inRequest?.reqStatus) }]}>
               <View style={styles.alert}>
                 <Text style={styles.alertText}>{inRequest?.reqStatus}</Text>
+                <Text style={styles.alertText}>{inRequest?.formattedUpdateDateTime.formattedDate}</Text>
+                <Text style={styles.alertText}>{inRequest?.formattedUpdateDateTime.formattedTime}</Text>
               </View>
             </View>
             <View style={styles.detailsContainer}>
@@ -59,19 +97,19 @@ function InRequestDocument({ route, navigation }) {
               </View>
               <View style={styles.detailsRow}>
                 <Text style={styles.label}>Created Date:</Text>
-                <Text style={styles.fetchData}>{inRequest?.createdDate}</Text>
+                <Text style={styles.fetchData}>{inRequest?.formattedCreationDateTime.formattedDate}</Text>
               </View>
               <View style={styles.detailsRow}>
                 <Text style={styles.label}>Created Time:</Text>
-                <Text style={styles.fetchData}>{inRequest?.createdTime}</Text>
+                <Text style={styles.fetchData}>{inRequest?.formattedCreationDateTime.formattedTime}</Text>
               </View>
               <View style={styles.detailsRow}>
                 <Text style={styles.label}>Department:</Text>
-                <Text style={styles.fetchData}>{inRequest?.department}</Text>
+                <Text style={styles.fetchData}>{userDetails?.department}</Text>
               </View>
               <View style={styles.detailsRow}>
                 <Text style={styles.label}>Created By:</Text>
-                <Text style={styles.fetchData}>{inRequest?.createdBy}</Text>
+                <Text style={styles.fetchData}>{userDetails?.firstName}</Text>
               </View>
               <View style={styles.detailsRow}>
                 <Text style={styles.label}>Emp.ID:</Text>
@@ -86,27 +124,27 @@ function InRequestDocument({ route, navigation }) {
               <Text style={styles.tableHeaderText}>Requested Quantity</Text>
               <Text style={styles.tableHeaderText}>Item Group</Text>
             </View>
-            {inRequest?.items?.map((item, index) => (
-              <View key={index} style={styles.tableRow}>
-                <Text style={styles.tableRowText}>{item.itemId}</Text>
-                <Text style={styles.tableRowText}>{item.itemName}</Text>
-                <Text style={styles.tableRowText}>{item.requestedQuantity}</Text>
-                <Text style={styles.tableRowText}>{item.itemGroup}</Text>
+            <View style={styles.tableRow}>
+                <Text style={styles.tableRowText}>{itemDetails?.itemId}</Text>
+                <Text style={styles.tableRowText}>{itemDetails?.itemName}</Text>
+                <Text style={styles.tableRowText}>{inRequest?.quantity}</Text>
+                <Text style={styles.tableRowText}>{itemDetails?.itemGroup}</Text>
               </View>
-            ))}
           </View>
           <View style={styles.reasonContainer}>
             <Text style={styles.reasonTitle}>Reason</Text>
             <Text style={styles.reasonText}>{inRequest?.reason}</Text>
           </View>
-          <View style={styles.descriptionContainer}>
+          {inRequest?.description && (
+            <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionTitle}>Description</Text>
             <Text style={styles.descriptionText}>{inRequest?.description}</Text>
-          </View>
-          <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
+            </View>
+          )}
         </View>
+        <TouchableOpacity style={styles.fixedCloseButton}onPress={() => navigation.goBack()}>
+        <Text style={styles.fixedCloseButtonText}>Close</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaProvider>
   );
@@ -161,7 +199,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   alert: {
-    backgroundColor: '#32CD32',
     padding: 10,
     borderRadius: 5,
     alignSelf: 'flex-start',
@@ -174,7 +211,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     borderRadius: 5,
-    marginVertical: 5,
+    marginVertical: 8,
     alignItems: 'flex-end', // Align items to the end (right)
   },
   detailsRow: {
@@ -184,11 +221,11 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
-    width: '30%',
+    width: '40%',
     textAlign: 'left', // Align text to the right
   },
   fetchData: {
-    width: '20%',
+    width: '40%',
     textAlign: 'left', // Align text to the left
   },
   tableContainer: {
@@ -232,19 +269,19 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 16,
   },
-  closeButton: {
-    backgroundColor: '#ffffff',
-    borderColor: '#007BFF',
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  closeButtonText: {
-    color: '#007BFF',
-    fontWeight: 'bold',
-  },
+//  closeButton: {
+//    backgroundColor: '#ffffff',
+//    borderColor: '#007BFF',
+//    borderWidth: 1,
+//    padding: 10,
+//    borderRadius: 5,
+//    alignItems: 'center',
+//    marginTop: 10,
+//  },
+//  closeButtonText: {
+//    color: '#007BFF',
+//    fontWeight: 'bold',
+//  },
   menuHeading: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -256,4 +293,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: 'red',
   },
+    fixedCloseButton: {
+      position: 'absolute',
+      bottom: 20,
+      right: 20,
+      backgroundColor: '#007BFF',
+      padding: 10,
+      borderRadius: 5,
+    },
+    fixedCloseButtonText: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+    },
 });
