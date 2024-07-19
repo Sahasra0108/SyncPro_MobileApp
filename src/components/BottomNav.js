@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Image, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/Profile";
+import ProfileInfo from "../screens/ProfileInfo";
 import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
@@ -44,7 +44,6 @@ function ProfileTabIcon() {
       />
       <View style={styles.profileText}>
         <Text style={styles.profileName}>Femi John</Text>
-        <Text style={styles.profileEmail}>femijohn@gmail.com</Text>
       </View>
     </View>
   );
@@ -101,8 +100,8 @@ function BottomNav() {
         }}
       />
       <BottomTab.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="ProfileInfo"
+        component={ProfileInfo}
         options={{
           tabBarLabel: "",
           tabBarIcon: () => <ProfileTabIcon />,
