@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Dimensions, View } from "react-native";
+import { Text, Dimensions, View, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { LineChart } from "react-native-chart-kit";
 
@@ -16,34 +16,27 @@ const chartConfig = {
 const StockLineChart = ({ category, year }) => {
   const [stockIn, setStockIn] = useState([]);
   const [stockOut, setStockOut] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true)
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://10.0.2.2:8080/stock-in/getAll?itemGroup=${category}&year=${year}`
-        );
-        setStockIn(response.data);
+        const [stockInResponse, stockOutResponse] = await Promise.all([
+          axios.get(
+            `http://10.0.2.2:8080/stock-in/getAll?itemGroup=${category}&year=${year}`
+          ),
+          axios.get(
+            `http://10.0.2.2:8080/stock-out/getAll?itemGroup=${category}&year=${year}`
+          ),
+        ]);
+        setStockIn(stockInResponse.data);
+        setStockOut(stockOutResponse.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
-
-    fetchData();
-  }, [category, year]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://10.0.2.2:8080/stock-out/getAll?itemGroup=${category}&year=${year}`
-        );
-        setStockOut(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
   }, [category, year]);
 
@@ -134,7 +127,7 @@ const StockLineChart = ({ category, year }) => {
 
   return (
     <View>
-      {stockIn.length === 0 && stockOut.length === 0 ? (
+     { stockIn.length === 0 && stockOut.length === 0 ? (
         <Text className="text-center m-10">No records found</Text>
       ) : (
         <LineChart

@@ -108,15 +108,8 @@ const AdminDashboard = () => {
             onPress={() => navigation.navigate("ItemUsageAnalysis")}
           />
         </View>
-        <View style={style.menuContainer}>
-          <Text style={style.menuHeding}>Inventory</Text>
-          <Button name="Item" onPress={() => navigation.navigate("ItemList")} />
-          <Button name="Adjustment"
-          onPress={() => navigation.navigate("AdjustmentList")}
-          />
-          <Button name="Stock In" onPress={() => {}} />
-          <Button name="Stock Out" onPress={() => {}} />
-        </View>
+       
+       
  
 
       </ScrollView>
@@ -132,6 +125,7 @@ const style = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
     paddingHorizontal: 5,
+    marginBottom:60
   },
   iconContainer: {
     flexDirection: "row",
