@@ -42,7 +42,7 @@ const InsightTable = ({ category, year, isOpen }) => {
     const fetchMostRequested = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/request/mostRequested?itemGroup=${category}&year=${year}`
+          `http://10.0.2.2:8080/request/mostRequested?itemGroup=${category}&year=${year}`
         );
         const mostRequestedItemData = {
           id: response.data.item.itemId,
@@ -76,6 +76,11 @@ const InsightTable = ({ category, year, isOpen }) => {
         <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />
       ) : tickets.length > 0 ? (
         <View style={styles.tableContainer}>
+        <View style={styles.row}>
+            <Text style={styles.headerCell}>Item Name</Text>
+            <Text style={styles.headerCell}>Brand</Text>
+            <Text style={styles.headerCell}>Count</Text>
+          </View>
           <TouchableOpacity style={styles.row} onPress={() => setOpen(!open)}>
             <Text style={styles.cell}>{tickets[0].itemName}</Text>
             <Text style={styles.cell}>{tickets[0].brand}</Text>
@@ -86,13 +91,15 @@ const InsightTable = ({ category, year, isOpen }) => {
               data={tickets[0].details}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity
+                
+                <View
                   style={styles.detailsRow}
+                  
                 >
                   <Text style={styles.cell}>{item.id}</Text>
                   <Text style={styles.cell}>{new Date(item.date).toLocaleDateString()}</Text>
                   <Text style={styles.cell}>{item.issue}</Text>
-                </TouchableOpacity>
+                </View>
               )}
             />
           )}
@@ -108,13 +115,20 @@ const InsightTable = ({ category, year, isOpen }) => {
       {loadingMostRequested ? (
         <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />
       ) : mostRequestedItem ? (
-        <TouchableOpacity
-          style={styles.row}
+        <View
+          style={styles.tableContainer}
         >
+         <View style={styles.row}>
+            <Text style={styles.headerCell}>Item Name</Text>
+            <Text style={styles.headerCell}>Brand</Text>
+            <Text style={styles.headerCell}>Count</Text>
+          </View>
+          <View style={styles.row}>
           <Text style={styles.cell}>{mostRequestedItem.itemName}</Text>
           <Text style={styles.cell}>{mostRequestedItem.brand}</Text>
           <Text style={styles.cell}>{mostRequestedItem.count}</Text>
-        </TouchableOpacity>
+          </View>
+        </View>
       ) : (
         renderNoRecords("No records found")
       )}
@@ -141,6 +155,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 8,
     overflow: 'hidden',
+  },
+  headerCell: {
+    flex: 1,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   row: {
     flexDirection: 'row',

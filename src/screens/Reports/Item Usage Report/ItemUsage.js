@@ -41,48 +41,53 @@ export default UsageAnalysis = () => {
   }, [category, year]);
 
   return (
-    <ScrollView style={styles.safeArea}>
-      <View style={styles.pickerContainer}>
-        <RNPickerSelect
-          onValueChange={(value) => setCategory(value)}
-          value={category}
-          items={categoryList}
-          style={pickerSelectStyles.categoryPicker}
-        //  placeholder={{ label: category.toString, value: category }}
-        />
-        <RNPickerSelect
-          onValueChange={(value) => setYear(value)}
-          value={year}
-          items={yearOptions()}
-          style={pickerSelectStyles.yearPicker}
-         // placeholder={{ label: "2024", value: year }}
-        />
-      </View>
-      <View style={styles.view}>
-        <Text style={styles.heading}>
-          USAGE ANALYSIS OF CATEGORY {category} {"\n"} (JAN-DEC) {"\n"} {year}
-        </Text>
-      </View>
-      <View style={styles.container}>
-        <UsageBarChart category={category} year={year} />
-      </View>
-      <View style={styles.container}>
-        <StockLineChart category={category} year={year} />
-      </View>
-      <View style={styles.container}>
-        <InsightTable category={category} year={year} />
-      </View>
-     
-    </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.scrollViewContainer}>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            onValueChange={(value) => setCategory(value)}
+            value={category}
+            items={categoryList}
+            style={pickerSelectStyles.categoryPicker}
+            //  placeholder={{ label: category.toString, value: category }}
+          />
+          <RNPickerSelect
+            onValueChange={(value) => setYear(value)}
+            value={year}
+            items={yearOptions()}
+            style={pickerSelectStyles.yearPicker}
+            // placeholder={{ label: "2024", value: year }}
+          />
+        </View>
+        <View style={styles.view}>
+          <Text style={styles.heading}>
+            USAGE ANALYSIS OF CATEGORY {category} {"\n"} (JAN-DEC) {"\n"} {year}
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <UsageBarChart category={category} year={year} />
+        </View>
+        <View style={styles.container}>
+          <StockLineChart category={category} year={year} />
+        </View>
+        <View style={styles.container}>
+          <InsightTable category={category} year={year} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    justifyContent: "flex-start",
     padding: 16,
-    marginBottom:100
-    // alignItems:"stretch"
+    marginBottom: 100,
+  },
+  scrollViewContainer: {
+    flexGrow: 1,
+   
   },
   pickerContainer: {
     flexDirection: "row",
@@ -106,7 +111,6 @@ const styles = StyleSheet.create({
   },
 
   heading: {
-    
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
@@ -114,9 +118,7 @@ const styles = StyleSheet.create({
 });
 
 const pickerSelectStyles = StyleSheet.create({
-
   categoryPicker: {
- 
     inputAndroid: {
       fontSize: 16,
       paddingHorizontal: 10,
@@ -127,12 +129,11 @@ const pickerSelectStyles = StyleSheet.create({
       color: "black",
       paddingRight: 30, // to ensure the text is never behind the icon
       width: 260, // Increased width for category picker
-      marginHorizontal: 2, 
+      marginHorizontal: 2,
     },
   },
 
   yearPicker: {
- 
     inputAndroid: {
       fontSize: 16,
       paddingHorizontal: 10,
@@ -144,8 +145,6 @@ const pickerSelectStyles = StyleSheet.create({
       paddingRight: 30, // to ensure the text is never behind the icon
       width: 120, // Increased width for category picker
       marginHorizontal: 2, // Adjusted margin for spacing
-
     },
   },
-
 });
