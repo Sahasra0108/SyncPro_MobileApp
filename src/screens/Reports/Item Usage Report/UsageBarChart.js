@@ -80,9 +80,7 @@ const UsageBarChart = ({ category, year }) => {
   };
   return (
     <View>
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : requestsByMonth.length === 0 ? (
+    { requestsByMonth.length === 0 ? (
         <Text className="text-center m-10">No records found</Text>
       ) : (
         <BarChart

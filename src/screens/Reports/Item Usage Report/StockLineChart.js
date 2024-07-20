@@ -127,9 +127,7 @@ const StockLineChart = ({ category, year }) => {
 
   return (
     <View>
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : stockIn.length === 0 && stockOut.length === 0 ? (
+     { stockIn.length === 0 && stockOut.length === 0 ? (
         <Text className="text-center m-10">No records found</Text>
       ) : (
         <LineChart

@@ -72,9 +72,7 @@ const InsightTable = ({ category, year, isOpen }) => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Most Frequently Maintained Item</Text>
       </View>
-      {loadingTickets ? (
-        <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />
-      ) : tickets.length > 0 ? (
+     { tickets.length > 0 ? (
         <View style={styles.tableContainer}>
         <View style={styles.row}>
             <Text style={styles.headerCell}>Item Name</Text>
@@ -112,9 +110,7 @@ const InsightTable = ({ category, year, isOpen }) => {
         <Text style={styles.headerText}>Most Requested Item</Text>
       </View>
 
-      {loadingMostRequested ? (
-        <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />
-      ) : mostRequestedItem ? (
+     { mostRequestedItem ? (
         <View
           style={styles.tableContainer}
         >

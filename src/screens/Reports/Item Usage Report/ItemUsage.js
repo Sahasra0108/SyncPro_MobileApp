@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  TouchableOpacity,
+  ActivityIndicator,
   View,
   StyleSheet,
   Text,
@@ -34,10 +34,16 @@ const yearOptions = () => {
 export default UsageAnalysis = () => {
   const [category, setCategory] = useState("COMPUTERS_AND_LAPTOPS");
   const [year, setYear] = useState(currentYear);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Selected Category:", category);
-    console.log("Selected Year:", year);
+    setLoading(true);
+    // Simulate data loading
+    const loadData = setTimeout(() => {
+      setLoading(false);
+    }, 10000); // Simulate a 5-second loading time
+
+    return () => clearTimeout(loadData);
   }, [category, year]);
 
   return (
@@ -49,30 +55,37 @@ export default UsageAnalysis = () => {
             value={category}
             items={categoryList}
             style={pickerSelectStyles.categoryPicker}
-            //  placeholder={{ label: category.toString, value: category }}
+      
           />
           <RNPickerSelect
             onValueChange={(value) => setYear(value)}
             value={year}
             items={yearOptions()}
             style={pickerSelectStyles.yearPicker}
-            // placeholder={{ label: "2024", value: year }}
+   
           />
         </View>
-        <View style={styles.view}>
-          <Text style={styles.heading}>
-            USAGE ANALYSIS OF CATEGORY {category} {"\n"} (JAN-DEC) {"\n"} {year}
-          </Text>
-        </View>
-        <View style={styles.container}>
-          <UsageBarChart category={category} year={year} />
-        </View>
-        <View style={styles.container}>
-          <StockLineChart category={category} year={year} />
-        </View>
-        <View style={styles.container}>
-          <InsightTable category={category} year={year} />
-        </View>
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <View>
+            <View style={styles.view}>
+              <Text style={styles.heading}>
+                USAGE ANALYSIS OF CATEGORY {category} {"\n"} (JAN-DEC) {"\n"}{" "}
+                {year}
+              </Text>
+            </View>
+            <View style={styles.container}>
+              <UsageBarChart category={category} year={year} />
+            </View>
+            <View style={styles.container}>
+              <StockLineChart category={category} year={year} />
+            </View>
+            <View style={styles.container}>
+              <InsightTable category={category} year={year} />
+            </View>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -87,7 +100,6 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     flexGrow: 1,
-   
   },
   pickerContainer: {
     flexDirection: "row",
