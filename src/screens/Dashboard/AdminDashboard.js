@@ -127,6 +127,7 @@ const style = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
     paddingHorizontal: 5,
+    marginBottom:60
   },
   iconContainer: {
     flexDirection: "row",

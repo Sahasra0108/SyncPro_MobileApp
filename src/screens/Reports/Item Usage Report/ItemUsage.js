@@ -72,6 +72,7 @@ export default UsageAnalysis = () => {
       <View style={styles.container}>
         <InsightTable category={category} year={year} />
       </View>
+     
     </ScrollView>
   );
 };
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     padding: 16,
+    marginBottom:100
     // alignItems:"stretch"
   },
   pickerContainer: {
