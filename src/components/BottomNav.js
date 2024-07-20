@@ -9,14 +9,21 @@ import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
 import AdjustmentList from "../screens/Adjustment/AdjustmentList";
-import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage"; 
 import ItemDetails from "../screens/InventoryItem/ItemDetail";
+import TicketList from "../screens/Ticket/TicketList";
+import Newticket from "../screens/Ticket/Newticket";
+import UserActivityHistory from "../screens/Reports/History";
+
+ 
+ 
+
 
 
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-//This is a comment
+
 const screenOptions = {
   tabBarShowLabel: false,
   headerShown: false,
@@ -67,27 +74,30 @@ function AdminStack() {
         name="InRequestList"
         component={InRequestList}
         options={{ title: "All InRequests" }}
-
       />
       <Stack.Screen
         name="InRequestDocument"
         component={InRequestDocument}
-        options={{ title: "Request Document" }}
+        options={{ title: "Inventory Request Document" }}
+      />
+      <Stack.Screen
+        name="TicketList"
+        component={TicketList}
+        options={{ title: "All Issue Tickets" }}
 
 
       />
+       <Stack.Screen
+        name="Newticket"
+        component={Newticket}
+        options={{ title: "New ticket" }}
 
-     <Stack.Screen
-        name="ItemUsageAnalysis"
-        component={ItemUsage}
-        options={{ title: "Item Usage Analysis" }}
 
-     />
-
+      />
       <Stack.Screen
-        name="AdjustmentList"
-        component={AdjustmentList}
-        options={{ title: "All Adjustments" }}
+        name="UserActivityHistory"
+        component={UserActivityHistory}
+        options={{ title: "Recent Activities" }}
 
 
       />
