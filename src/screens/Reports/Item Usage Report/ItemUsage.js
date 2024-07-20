@@ -5,62 +5,30 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
+import RNPickerSelect from "react-native-picker-select";
 import UsageBarChart from "./UsageBarChart";
 import StockLineChart from "./StockLineChart";
+import InsightTable from "./InsightTable";
 
 const categoryList = [
-  { value: "COMPUTERS_AND_LAPTOPS", name: "Computers & Laptops" },
-  { value: "COMPUTER_ACCESSORIES", name: "Computer Accessories" },
-  { value: "COMPUTER_HARDWARE", name: "Computer Hardware" },
-  { value: "PRINTERS_AND_SCANNERS", name: "PrinterS & Scanners" },
-  { value: "OFFICE_SUPPLIES", name: "Office Supplies" },
-  { value: "FURNITURE", name: "Furniture" },
-  { value: "OTHER", name: "Other" },
+  { value: "COMPUTERS_AND_LAPTOPS", label: "Computers & Laptops" },
+  { value: "COMPUTER_ACCESSORIES", label: "Computer Accessories" },
+  { value: "COMPUTER_HARDWARE", label: "Computer Hardware" },
+  { value: "PRINTERS_AND_SCANNERS", label: "PrinterS & Scanners" },
+  { value: "OFFICE_SUPPLIES", label: "Office Supplies" },
+  { value: "FURNITURE", label: "Furniture" },
+  { value: "OTHER", label: "Other" },
 ];
 
 const currentYear = new Date().getFullYear();
 const yearOptions = () => {
   const yearArray = [];
   for (let year = 2020; year <= currentYear; year++) {
-    yearArray.push(year);
+    yearArray.push({ label: year.toString(), value: year });
   }
   return yearArray;
-};
-
-const renderButtonForCategory = (selectedItem) => {
-  return (
-    <TouchableOpacity style={styles.customButton}>
-      <Text style={styles.customButtonText}>
-        {selectedItem ? selectedItem.name : "Select an item category"}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-const renderButtonForYear = (selectedItem) => {
-  return (
-    <TouchableOpacity style={styles.customButton}>
-      <Text style={styles.customButtonText}>
-        {selectedItem ? selectedItem : "Select a year"}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-
-const renderCategory = (category) => {
-  return (
-    <View style={styles.customItem}>
-      <Text style={styles.customItemText}>{category.name}</Text>
-    </View>
-  );
-};
-const renderYear = (item) => {
-  return (
-    <View style={styles.customItem}>
-      <Text style={styles.customItemText}>{item}</Text>
-    </View>
-  );
 };
 
 export default UsageAnalysis = () => {
@@ -73,42 +41,38 @@ export default UsageAnalysis = () => {
   }, [category, year]);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.view}>
-        <SelectDropdown
-          data={categoryList}
-          onSelect={(selectedItem) => {
-            setCategory(selectedItem.value);
-          }}
-          renderButton={renderButtonForCategory}
-          renderItem={renderCategory}
+    <ScrollView style={styles.safeArea}>
+      <View style={styles.pickerContainer}>
+        <RNPickerSelect
+          onValueChange={(value) => setCategory(value)}
+          value={category}
+          items={categoryList}
+          style={pickerSelectStyles.categoryPicker}
+        //  placeholder={{ label: category.toString, value: category }}
         />
-        <SelectDropdown
-          data={yearOptions()}
-          onSelect={(selectedItem) => {
-            setYear(selectedItem);
-          }}
-          renderButton={renderButtonForYear}
-          renderItem={renderYear}
+        <RNPickerSelect
+          onValueChange={(value) => setYear(value)}
+          value={year}
+          items={yearOptions()}
+          style={pickerSelectStyles.yearPicker}
+         // placeholder={{ label: "2024", value: year }}
         />
-        {/* <TouchableOpacity style={styles.customButton}>
-          <Text style={styles.customButtonText}>
-            Print
-          </Text>
-        </TouchableOpacity> */}
       </View>
       <View style={styles.view}>
         <Text style={styles.heading}>
-          USAGE ANALYSIS OF CATEGORY {category} {'\n'} (JAN-DEC) {'\n'}  {year} 
+          USAGE ANALYSIS OF CATEGORY {category} {"\n"} (JAN-DEC) {"\n"} {year}
         </Text>
       </View>
       <View style={styles.container}>
-        <UsageBarChart category={category} year={year}/>
+        <UsageBarChart category={category} year={year} />
       </View>
       <View style={styles.container}>
-        <StockLineChart category={category} year={year}/>
+        <StockLineChart category={category} year={year} />
       </View>
-    </SafeAreaView>
+      <View style={styles.container}>
+        <InsightTable category={category} year={year} />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -118,36 +82,68 @@ const styles = StyleSheet.create({
     padding: 16,
     // alignItems:"stretch"
   },
+  pickerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    margin: 2,
+  },
+
   view: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
     margin: 2,
   },
-  container:{
+  container: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
     margin: 2,
-    marginRight:30
+    marginRight: 30,
   },
-  customButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    backgroundColor: "#007bff",
-    borderRadius: 5,
-    width: 160,
-    height: 50,
-    margin: 5,
-  },
-  customButtonText: {
-    color: "#fff",
-    fontSize: 12,
-  },
+
   heading: {
+    
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
   },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+
+  categoryPicker: {
+ 
+    inputAndroid: {
+      fontSize: 16,
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderWidth: 0.5,
+      borderColor: "gray",
+      borderRadius: 8,
+      color: "black",
+      paddingRight: 30, // to ensure the text is never behind the icon
+      width: 260, // Increased width for category picker
+      marginHorizontal: 2, 
+    },
+  },
+
+  yearPicker: {
+ 
+    inputAndroid: {
+      fontSize: 16,
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderWidth: 0.5,
+      borderColor: "gray",
+      borderRadius: 8,
+      color: "black",
+      paddingRight: 30, // to ensure the text is never behind the icon
+      width: 120, // Increased width for category picker
+      marginHorizontal: 2, // Adjusted margin for spacing
+
+    },
+  },
+
 });

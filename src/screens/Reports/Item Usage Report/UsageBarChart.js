@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Text, Dimensions } from "react-native";
+import { Text, Dimensions, ActivityIndicator, View } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import axios from "axios";
-
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -22,12 +21,13 @@ const UsageBarChart = ({ category, year }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `http://10.0.2.2:8080/request/filtered?itemGroup=${category}&year=${year}`
         );
-        console.log("requests",response.data);
+        console.log("requests", response.data);
         setRequests(response.data);
       } catch (error) {
         console.log(error);
@@ -41,47 +41,62 @@ const UsageBarChart = ({ category, year }) => {
 
   console.log(requests);
 
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
+ 
 
-  
-    const requestsByMonth = requests
-    .filter(req => req.reqStatus !== "REJECTED")
+  const requestsByMonth = requests
+    .filter((req) => req.reqStatus !== "REJECTED")
     .reduce((acc, rq) => {
       const [year, month] = rq.createdDateTime; // Extract year and month
       acc[month - 1] = acc[month - 1] || 0; // Month is 1-indexed
       acc[month - 1]++;
       return acc;
     }, {});
-    console.log(requestsByMonth);
+  console.log(requestsByMonth);
 
-    const xLabels = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
+  const xLabels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-    const data = {
-      labels: xLabels,
-      datasets: [
-        {
-          data: xLabels.map((_, index) => requestsByMonth[index] || 0),
-          color: (opacity = 1) => `rgba(92, 153, 142, ${opacity})`,
-          strokeWidth: 2,
-        }
-      ],
-    };
+  const data = {
+    labels: xLabels,
+    datasets: [
+      {
+        data: xLabels.map((_, index) => requestsByMonth[index] || 0),
+        color: (opacity = 1) => `rgba(92, 153, 142, ${opacity})`,
+        strokeWidth: 2,
+      },
+    ],
+  };
   return (
-    <BarChart
-      //style={graphStyle}
-      data={data}
-      width={screenWidth-10}
-      height={220}
-      //yAxisLabel="$"
-      chartConfig={chartConfig}
-      //verticalLabelRotation={30}
-      withInnerLines="true"
-    />
+    <View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : requestsByMonth.length === 0 ? (
+        <Text className="text-center m-10">No records found</Text>
+      ) : (
+        <BarChart
+          //style={graphStyle}
+          data={data}
+          width={screenWidth - 10}
+          height={220}
+          //yAxisLabel="$"
+          chartConfig={chartConfig}
+          //verticalLabelRotation={30}
+          withInnerLines="true"
+        />
+      )}
+    </View>
   );
 };
 
