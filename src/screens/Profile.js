@@ -37,7 +37,7 @@ export default function ProfileScreen(props) {
 
   useEffect(() => {
 
-    axios.get(`http://10.0.2.2:8080/user/users/${userId}`)  
+    axios.get(`http://10.0.2.2:8080/user/users/1`)  
       .then(response => {
         setUserDetails(response.data);
       })

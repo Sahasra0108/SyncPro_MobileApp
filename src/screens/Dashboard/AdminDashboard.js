@@ -20,6 +20,7 @@ const AdminDashboard = () => {
   const [totItems, setTotItems] = useState([]);
   const [totUsers, setTotUsers] = useState([]);
   const navigation = useNavigation();
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,25 +81,10 @@ const AdminDashboard = () => {
 
         <View style={style.menuContainer}>
           <Text style={style.menuHeding}>Requests & Reservations</Text>
-          <Button name="Requests" onPress={() => {}} />
+          <Button name="Requests" onPress={() => navigation.navigate("InRequestList")} />
           <Button name="External Reservations" onPress={() => {}} />
           <Button name="My Reservations" onPress={() => {}} />
-          <Button name="Maintenance Ticket" onPress={() => {}} />
-        </View>
-        <View style={style.menuContainer}>
-          <Text style={style.menuHeding}>Reports</Text>
-          <Button
-            name="View History"
-            onPress={() => {
-              console.log("pressed");
-            }}
-          />
-          <Button name="Inventory Summary" onPress={() => {}} />
-          <Button name="Stock Alert" onPress={() => {}} />
-          <Button
-            name="Item Usage Analysis"
-            onPress={() => navigation.navigate("ItemUsageAnalysis")}
-          />
+          <Button name="Issue Ticket" onPress={() => navigation.navigate("TicketList")} />
         </View>
         <View style={style.menuContainer}>
           <Text style={style.menuHeding}>Inventory</Text>
@@ -109,34 +95,22 @@ const AdminDashboard = () => {
           <Button name="Stock In" onPress={() => navigation.navigate("StockInList")}/>
           <Button name="Stock Out" onPress={() => navigation.navigate("StockOutList")} />
         </View>
-
-
-      <View style={style.menuContainer}>
-        <Text style={style.text}>Requests & Reservations</Text>
-        <Button name="Requests" onPress={() => navigation.navigate("InRequestList")} />
-        <Button name="External Reservations" onPress={() => {}} />
-        <Button name="My Reservations" onPress={() => {}} />
-        <Button name="Maintenance Ticket" onPress={() => {}} />
-      </View>
-      <View style={style.menuContainer}>
-        <Text style={style.text}>Reports</Text>
-        <Button
-          name="View History"
-          onPress={() => {
-            console.log("pressed");
-          }}
-        />
-        <Button name="Inventory Summary" onPress={() => {}} />
-        <Button name="Stock Alert" onPress={() => {}} />
-        <Button name="Item Usage Analysis" onPress={() => {}} />
-      </View>
-      <View style={style.menuContainer}>
-        <Text style={style.text}>Inventory Item</Text>
-        <Button name="Item" onPress={() => navigation.navigate("ItemList")} />
-        <Button name="Adjustment" onPress={() => {}} />
-        <Button name="Stock In" onPress={() => {}} />
-        <Button name="Stock Out" onPress={() => {}} />
-      </View>
+        <View style={style.menuContainer}>
+          <Text style={style.menuHeding}>Reports</Text>
+          <Button
+            name="View History"
+            onPress={() => navigation.navigate("UserActivityHistory")}
+          />
+          <Button name="Inventory Summary" onPress={() => {}} />
+          <Button name="Stock Alert" onPress={() => {}} />
+          <Button
+            name="Item Usage Analysis"
+            onPress={() => navigation.navigate("ItemUsageAnalysis")}
+          />
+        </View>
+       
+       
+ 
 
       </ScrollView>
     </SafeAreaView>
@@ -151,6 +125,7 @@ const style = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
     paddingHorizontal: 5,
+    marginBottom:60
   },
   iconContainer: {
     flexDirection: "row",

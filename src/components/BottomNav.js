@@ -6,13 +6,17 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/Profile";
 import ItemList from "../screens/InventoryItem/ItemList";
-
-import InRequestList from "../screens/InventoryRequest/InRequestList"
+import InRequestList from "../screens/InventoryRequest/InRequestList";
+import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
 import AdjustmentList from "../screens/Adjustment/AdjustmentList";
 import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
 import AdjustmentForm from "../screens/Adjustment/AdjustmentForm";
 import StockInList from "../screens/StockIn/StockInList";
 import StockOutList from "../screens/StockOut/StockOutList";
+import ItemDetails from "../screens/InventoryItem/ItemDetail";
+import TicketList from "../screens/Ticket/TicketList";
+import Newticket from "../screens/Ticket/Newticket";
+import UserActivityHistory from "../screens/Reports/History";
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,25 +62,40 @@ function AdminStack() {
         options={{ title: "All Items" }}
       />
 
-     <Stack.Screen
+      <Stack.Screen
+        name="ItemDetails"
+        component={ItemDetails}
+        options={{ title: "Item Details" }}
+      />
+      <Stack.Screen
+        name="ItemUsageAnalysis"
+        component={ItemUsage}
+        options={{ title: "Item Usage Analysis Report" }}
+      />
+      <Stack.Screen
         name="InRequestList"
         component={InRequestList}
         options={{ title: "All InRequests" }}
-
       />
-
-     <Stack.Screen
-        name="ItemUsageAnalysis"
-        component={ItemUsage}
-        options={{ title: "Item Usage Analysis" }}
-
-     />
-
       <Stack.Screen
-        name="AdjustmentList"
-        component={AdjustmentList}
-        options={{ title: "All Adjustments" }}
-
+        name="InRequestDocument"
+        component={InRequestDocument}
+        options={{ title: "Inventory Request Document" }}
+      />
+      <Stack.Screen
+        name="TicketList"
+        component={TicketList}
+        options={{ title: "All Issue Tickets" }}
+      />
+      <Stack.Screen
+        name="Newticket"
+        component={Newticket}
+        options={{ title: "New ticket" }}
+      />
+      <Stack.Screen
+        name="UserActivityHistory"
+        component={UserActivityHistory}
+        options={{ title: "Recent Activities" }}
       />
 
       <Stack.Screen
@@ -105,7 +124,7 @@ function BottomNav() {
   return (
     <BottomTab.Navigator screenOptions={screenOptions}>
       <BottomTab.Screen
-        name="AdminHome"
+        name="Home"
         component={AdminStack}
         options={{
           tabBarLabel: "Home",
