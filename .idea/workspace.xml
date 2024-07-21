@@ -7,7 +7,7 @@
     <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="Login added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BottomNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ProfileInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ProfileInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +40,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "Login",
+    "git-widget-placeholder": "Maleesha",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/user/Downloads",
     "settings.editor.selected.configurable": "device.mirroring"

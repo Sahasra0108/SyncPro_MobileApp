@@ -16,7 +16,6 @@ import Newticket from "../screens/Ticket/Newticket";
 
 
 
-
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 

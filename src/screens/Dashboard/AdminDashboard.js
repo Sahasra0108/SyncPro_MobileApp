@@ -15,6 +15,7 @@ import StockInIcon from "../../../assets/stock-in.png";
 import StockOutIcon from "../../../assets/stock-out.png";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import TopNav from "../../components/TopNav";
 
 const AdminDashboard = () => {
   const [totItems, setTotItems] = useState([]);
@@ -52,6 +53,7 @@ const AdminDashboard = () => {
 
   return (
     <SafeAreaView style={style.safeArea}>
+    <TopNav />
       <ScrollView>
         <View>
           <Text>{today}</Text>
