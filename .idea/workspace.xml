@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="Unversioned files">
-      <change afterPath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/StockIn/StockInList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/StockOut/StockOutList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BottomNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -10,7 +10,9 @@ import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList"
 import AdjustmentList from "../screens/Adjustment/AdjustmentList";
 import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
-
+import AdjustmentForm from "../screens/Adjustment/AdjustmentForm";
+import StockInList from "../screens/StockIn/StockInList";
+import StockOutList from "../screens/StockOut/StockOutList";
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -76,6 +78,25 @@ function AdminStack() {
         options={{ title: "All Adjustments" }}
 
       />
+
+      <Stack.Screen
+         name="AdjustmentForm"
+         component={AdjustmentForm}
+         options={{ title: 'New Adjustment' }}
+      />
+
+      <Stack.Screen
+         name="StockInList"
+         component={StockInList}
+         options={{ title: 'Stock In' }}
+      />
+
+      <Stack.Screen
+               name="StockOutList"
+               component={StockOutList}
+               options={{ title: 'Stock Out' }}
+      />
+
     </Stack.Navigator>
   );
 }
