@@ -92,8 +92,8 @@ const AdminDashboard = () => {
           <Button name="Adjustment"
           onPress={() => navigation.navigate("AdjustmentList")}
           />
-          <Button name="Stock In" onPress={() => {}} />
-          <Button name="Stock Out" onPress={() => {}} />
+          <Button name="Stock In" onPress={() => navigation.navigate("StockInList")}/>
+          <Button name="Stock Out" onPress={() => navigation.navigate("StockOutList")} />
         </View>
         <View style={style.menuContainer}>
           <Text style={style.menuHeding}>Reports</Text>
