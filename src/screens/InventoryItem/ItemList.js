@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import axios from "axios";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet ,TouchableOpacity} from "react-native";
 import { DataTable } from "react-native-paper";
 
-function ItemList() {
+function ItemList({ navigation }) {
   const [items, setItems] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,11 +26,10 @@ function ItemList() {
     fetchData();
   }, []);
 
-  const from = 0; 
+  const from = 0;
   const to = items.length;
   return (
     <>
-
       <DataTable style={styles.container}>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title>Item id</DataTable.Title>
@@ -40,12 +38,19 @@ function ItemList() {
           <DataTable.Title>Status</DataTable.Title>
         </DataTable.Header>
         {items.slice(from, to).map((item) => (
-          <DataTable.Row key={item.id}>
-            <DataTable.Cell>{item.id}</DataTable.Cell>
-            <DataTable.Cell>{item.name}</DataTable.Cell>
-            <DataTable.Cell >{item.quantity}</DataTable.Cell>
-            <DataTable.Cell>{item.status}</DataTable.Cell>
-          </DataTable.Row>
+          <TouchableOpacity
+            key={item.id}
+            onPress={() =>
+              navigation.navigate("ItemDetails", { itemId: item.id })
+            }
+          >
+            <DataTable.Row key={item.id}>
+              <DataTable.Cell>{item.id}</DataTable.Cell>
+              <DataTable.Cell>{item.name}</DataTable.Cell>
+              <DataTable.Cell>{item.quantity}</DataTable.Cell>
+              <DataTable.Cell>{item.status}</DataTable.Cell>
+            </DataTable.Row>
+          </TouchableOpacity>
         ))}
       </DataTable>
     </>

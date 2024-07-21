@@ -11,10 +11,14 @@ import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
 import AdjustmentList from "../screens/Adjustment/AdjustmentList";
 import ItemUsage from "../screens/Reports/Item Usage Report/ItemUsage";
+import AdjustmentForm from "../screens/Adjustment/AdjustmentForm";
+import StockInList from "../screens/StockIn/StockInList";
+import StockOutList from "../screens/StockOut/StockOutList";
+import ItemDetails from "../screens/InventoryItem/ItemDetail";
 import TicketList from "../screens/Ticket/TicketList";
-import Newticket from "../screens/Ticket/Newticket";
-
-
+import Newticket from "../screens/Ticket/Newticket"; 
+import UserActivityHistory from "../screens/Reports/History";
+ 
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,6 +62,17 @@ function AdminStack() {
         component={ItemList}
         options={{ title: "All Items" }}
       />
+
+      <Stack.Screen
+        name="ItemDetails"
+        component={ItemDetails}
+        options={{ title: "Item Details" }}
+      />
+      <Stack.Screen
+        name="ItemUsageAnalysis"
+        component={ItemUsage}
+        options={{ title: "Item Usage Analysis Report" }}
+      />
       <Stack.Screen
         name="InRequestList"
         component={InRequestList}
@@ -72,22 +87,46 @@ function AdminStack() {
         name="TicketList"
         component={TicketList}
         options={{ title: "All Issue Tickets" }}
-
-
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Newticket"
         component={Newticket}
         options={{ title: "New ticket" }}
-
-
       />
+      <Stack.Screen
+        name="UserActivityHistory"
+        component={UserActivityHistory}
+        options={{ title: "Recent Activities" }}
+      />
+
+      <Stack.Screen
+         name="AdjustmentForm"
+         component={AdjustmentForm}
+         options={{ title: 'New Adjustment' }}
+      />
+
+      <Stack.Screen
+         name="StockInList"
+         component={StockInList}
+         options={{ title: 'Stock In' }}
+      />
+
+      <Stack.Screen
+               name="StockOutList"
+               component={StockOutList}
+               options={{ title: 'Stock Out' }}
+      />
+ 
          <Stack.Screen
            name="LoginPage"
            component={LoginPage}
            options={{ title: "Login" }}
          />
        </Stack.Navigator>
+ 
+
+    </Stack.Navigator>
+ 
   );
 }
 

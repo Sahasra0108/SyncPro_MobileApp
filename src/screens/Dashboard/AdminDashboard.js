@@ -86,15 +86,22 @@ const AdminDashboard = () => {
           <Button name="Requests" onPress={() => navigation.navigate("InRequestList")} />
           <Button name="External Reservations" onPress={() => {}} />
           <Button name="My Reservations" onPress={() => {}} />
-          <Button name="Maintenance Ticket" onPress={() => navigation.navigate("TicketList")} />
+          <Button name="Issue Ticket" onPress={() => navigation.navigate("TicketList")} />
+        </View>
+        <View style={style.menuContainer}>
+          <Text style={style.menuHeding}>Inventory</Text>
+          <Button name="Item" onPress={() => navigation.navigate("ItemList")} />
+          <Button name="Adjustment"
+          onPress={() => navigation.navigate("AdjustmentList")}
+          />
+          <Button name="Stock In" onPress={() => navigation.navigate("StockInList")}/>
+          <Button name="Stock Out" onPress={() => navigation.navigate("StockOutList")} />
         </View>
         <View style={style.menuContainer}>
           <Text style={style.menuHeding}>Reports</Text>
           <Button
             name="View History"
-            onPress={() => {
-              console.log("pressed");
-            }}
+            onPress={() => navigation.navigate("UserActivityHistory")}
           />
           <Button name="Inventory Summary" onPress={() => {}} />
           <Button name="Stock Alert" onPress={() => {}} />
@@ -103,16 +110,9 @@ const AdminDashboard = () => {
             onPress={() => navigation.navigate("ItemUsageAnalysis")}
           />
         </View>
-        <View style={style.menuContainer}>
-          <Text style={style.menuHeding}>Inventory</Text>
-          <Button name="Item" onPress={() => navigation.navigate("ItemList")} />
-          <Button name="Adjustment"
-          onPress={() => navigation.navigate("AdjustmentList")}
-          />
-          <Button name="Stock In" onPress={() => {}} />
-          <Button name="Stock Out" onPress={() => {}} />
-        </View>
-      
+       
+       
+ 
 
       </ScrollView>
     </SafeAreaView>
@@ -127,6 +127,7 @@ const style = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
     paddingHorizontal: 5,
+    marginBottom:60
   },
   iconContainer: {
     flexDirection: "row",
