@@ -5,6 +5,7 @@ import { View, Image, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileInfo from "../screens/ProfileInfo";
+import LoginPage from "../screens/Login/LoginPage";
 import ItemList from "../screens/InventoryItem/ItemList";
 import InRequestList from "../screens/InventoryRequest/InRequestList";
 import InRequestDocument from "../screens/InventoryRequest/InRequestDocument";
@@ -82,7 +83,12 @@ function AdminStack() {
 
 
       />
-    </Stack.Navigator>
+         <Stack.Screen
+           name="LoginPage"
+           component={LoginPage}
+           options={{ title: "Login" }}
+         />
+       </Stack.Navigator>
   );
 }
 

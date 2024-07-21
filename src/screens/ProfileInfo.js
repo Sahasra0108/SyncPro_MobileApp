@@ -10,9 +10,10 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
+import LoginService from "./Login/LoginService";
 
 export default function ProfileScreen(props) {
-  const { userId = "4", onLogout, navigation } = props;
+  const { userId = "4", navigation } = props;
   const [userDetails, setUserDetails] = useState({
     firstName: '',
     lastName: '',
@@ -36,9 +37,15 @@ export default function ProfileScreen(props) {
       });
   }, [userId]);
 
-  const handleLogout = () => {
-    // Add your logout logic here
-    if (onLogout) onLogout();
+  const handleLogout = async () => {
+    try {
+      await LoginService.logout();
+      Alert.alert("Success", "You have been logged out.");
+      navigation.navigate('LoginPage'); // Adjust the navigation target as needed
+    } catch (error) {
+      console.error('Logout failed:', error);
+      Alert.alert("Error", "Failed to log out. Please try again.");
+    }
   };
 
   const handleEdit = () => {
@@ -46,47 +53,49 @@ export default function ProfileScreen(props) {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.topic1}>Profile Info</Text>
-        <Text style={styles.label}>First Name</Text>
-        <Text style={styles.info}>{userDetails.firstName}</Text>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <Text style={styles.topic1}>Profile Info</Text>
+          <Text style={styles.label}>First Name</Text>
+          <Text style={styles.info}>{userDetails.firstName}</Text>
 
-        <Text style={styles.label}>Last Name</Text>
-        <Text style={styles.info}>{userDetails.lastName}</Text>
+          <Text style={styles.label}>Last Name</Text>
+          <Text style={styles.info}>{userDetails.lastName}</Text>
 
-        <Text style={styles.label}>Department</Text>
-        <Text style={styles.info}>{userDetails.department}</Text>
+          <Text style={styles.label}>Department</Text>
+          <Text style={styles.info}>{userDetails.department}</Text>
 
-        <Text style={styles.label}>Role</Text>
-        <Text style={styles.info}>{userDetails.role}</Text>
+          <Text style={styles.label}>Role</Text>
+          <Text style={styles.info}>{userDetails.role}</Text>
 
-        <Text style={styles.label}>Date Of Birth</Text>
-        <Text style={styles.info}>{userDetails.dateOfBirth}</Text>
+          <Text style={styles.label}>Date Of Birth</Text>
+          <Text style={styles.info}>{userDetails.dateOfBirth}</Text>
 
-        <Text style={styles.label}>Address</Text>
-        <Text style={styles.info}>{userDetails.address}</Text>
+          <Text style={styles.label}>Address</Text>
+          <Text style={styles.info}>{userDetails.address}</Text>
 
-        <Text style={styles.topic}>User Contact Info</Text>
+          <Text style={styles.topic}>User Contact Info</Text>
 
-        <Text style={styles.label}>Tel No</Text>
-        <Text style={styles.info}>{userDetails.telNo}</Text>
+          <Text style={styles.label}>Tel No</Text>
+          <Text style={styles.info}>{userDetails.telNo}</Text>
 
-        <Text style={styles.label}>Mobile</Text>
-        <Text style={styles.info}>{userDetails.mobileNo}</Text>
+          <Text style={styles.label}>Mobile</Text>
+          <Text style={styles.info}>{userDetails.mobileNo}</Text>
 
-        <Text style={styles.label}>Email Address</Text>
-        <Text style={styles.info}>{userDetails.email}</Text>
+          <Text style={styles.label}>Email Address</Text>
+          <Text style={styles.info}>{userDetails.email}</Text>
 
-        <Pressable style={styles.editButton} onPress={handleEdit}>
-          <Text style={styles.editText}>Edit</Text>
-        </Pressable>
+          <Pressable style={styles.editButton} onPress={handleEdit}>
+            <Text style={styles.editText}>Edit</Text>
+          </Pressable>
 
-        <Pressable style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutText}>Logout</Text>
-        </Pressable>
-      </ScrollView>
-    </View>
+          <Pressable style={styles.logoutButton} onPress={handleLogout}>
+            <Text style={styles.logoutText}>Logout</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
