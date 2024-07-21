@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
+ 
+    <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="Login added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BottomNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" afterDir="false" />
+    </list>
+ 
     <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="Unversioned files">
       <change afterPath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentForm.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/screens/StockIn/StockInList.js" afterDir="false" />
@@ -12,13 +18,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BottomNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BottomNav.js" afterDir="false" />
+      
       <change beforePath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Adjustment/AdjustmentList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Dashboard/AdminDashboard.js" afterDir="false" />
     </list>
-=======
+ 
     <list default="true" id="14ee2260-1698-42b6-b8a7-7173f114eb65" name="Changes" comment="inventory request modifications" />
->>>>>>> master
+ 
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,20 +47,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/Users/user/Downloads&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Maleesha&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Downloads&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;device.mirroring&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "ScreenshotViewer.SavePath": "C:/Users/user/Downloads",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "Maleesha",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/user/Downloads",
+    "settings.editor.selected.configurable": "device.mirroring"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -128,7 +135,31 @@
       <option name="project" value="LOCAL" />
       <updated>1721326793828</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=" modifications">
+      <option name="closed" value="true" />
+      <created>1721326954340</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721326954340</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Login added">
+      <option name="closed" value="true" />
+      <created>1721380866948</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1721380866948</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Login added">
+      <option name="closed" value="true" />
+      <created>1721380895326</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721380895326</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +182,8 @@
     <MESSAGE value="inventory request document added" />
     <MESSAGE value="modifications" />
     <MESSAGE value="inventory request modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="inventory request modifications" />
+    <MESSAGE value=" modifications" />
+    <MESSAGE value="Login added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login added" />
   </component>
 </project>
